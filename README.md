@@ -75,6 +75,6 @@ This app consumes the following Ensembl REST endpoints:
   https://rest.ensembl.org/info/assembly/{species}
   ```
 
-Only chromosomes (`coord_system === "chromosome"`) are displayed, ordered according to the `karyotype` field returned by the API.
+Chromosomes are displayed ordered according to the `karyotype` field returned by the API.
 
 ---
