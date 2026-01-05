@@ -65,7 +65,7 @@ http://localhost:3000
 
 This app consumes the following Ensembl REST endpoints:
 
-- **Species list**
+- **Species list (only groups with 'variation')**
   ```
   https://rest.ensembl.org/info/species
   ```
