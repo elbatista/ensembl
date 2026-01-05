@@ -11,7 +11,10 @@ function App() {
     const fetchSpecies = async () => {
       try {
         const data = await getSpecies();
-        setSpeciesList(data);
+        const variationSpecies = data.filter( (s) => Array.isArray(s.groups) && s.groups.includes("variation"));
+
+        setSpeciesList(variationSpecies);
+
       } catch (error) {
         console.error(error);
       }
@@ -38,19 +41,19 @@ function App() {
     fetchAssembly();
   }, [selectedSpecies]);
 
-  // Filter top-level chromosomes in customary order
+  // Filter chromosomes in customary order
   const chrList = assembly?.karyotype
-    ?.map((chrName) =>
-      assembly.top_level_region.find(
-        (region) => region.coord_system === "chromosome" && region.name === chrName
-      )
+  ?.map((chrName) =>
+    assembly.top_level_region.find(
+      (region) => region.name === chrName
     )
-    .filter(Boolean);
+  )
+  .filter(Boolean);
 
   // Compute total genome length in Mb
   const totalLengthMb = chrList
-    ? chrList.reduce((sum, chr) => sum + chr.length / 1_000_000, 0).toFixed(2)
-    : 0;
+  ? chrList.reduce((sum, chr) => sum + chr.length / 1_000_000, 0).toFixed(2)
+  : 0;
 
   return (
     <div className="container">
